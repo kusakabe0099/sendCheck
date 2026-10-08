@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>送信前の確認</title>
+  <script src="https://appsforoffice.microsoft.com/lib/1/hosted/office.js"></script>
+  <style>
+    :root {
+      --ink: #1f2a37;
+      --muted: #5b6675;
+      --line: #d9dee5;
+      --paper: #ffffff;
+      --internal: #0f766e;
+      --external: #b45309;
+      --external-bg: #fff4e5;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      padding: 16px;
+      font-family: "Yu Gothic UI", "Meiryo UI", system-ui, sans-serif;
+      font-size: 14px;
+      line-height: 1.6;
+      color: var(--ink);
+      background: var(--paper);
+    }
+    h1 { font-size: 18px; margin: 0 0 4px; }
+    h2 { font-size: 14px; margin: 20px 0 8px; }
+    .summary { color: var(--muted); margin: 0 0 8px; }
+
+    .group {
+      border: 1px solid var(--line);
+      border-left: 4px solid var(--internal);
+      border-radius: 4px;
+      padding: 8px 12px;
+      margin-bottom: 8px;
+    }
+    .group.external { border-left-color: var(--external); background: var(--external-bg); }
+    .group-head { display: flex; align-items: baseline; gap: 8px; font-weight: 600; }
+    .badge { font-size: 12px; font-weight: 600; color: var(--internal); }
+    .external .badge { color: var(--external); }
+    ul { list-style: none; margin: 4px 0 8px; padding: 0; }
+    li { word-break: break-all; }
+    .kind { display: inline-block; min-width: 2.6em; color: var(--muted); font-size: 12px; }
+    .kind.bcc { color: var(--external); font-weight: 600; }
+
+    label.check { display: flex; align-items: center; gap: 8px; cursor: pointer; }
+    input[type="checkbox"] { width: 18px; height: 18px; flex: none; }
+
+    button {
+      width: 100%;
+      margin-top: 20px;
+      padding: 10px 12px;
+      font: inherit;
+      font-weight: 600;
+      color: #fff;
+      background: var(--ink);
+      border: 0;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    button:disabled { background: #aab2bd; cursor: not-allowed; }
+    button:focus-visible, input:focus-visible { outline: 3px solid #2563eb; outline-offset: 2px; }
+    #status { margin-top: 12px; min-height: 1.6em; }
+    #status.ok { color: var(--internal); font-weight: 600; }
+    #status.error { color: #b91c1c; }
+    .empty { color: var(--muted); }
+  </style>
+</head>
+<body>
+  <h1>送信前の確認</h1>
+  <p class="summary" id="summary">読み込み中です。</p>
+
+  <section id="recipients"></section>
+  <section id="attachments"></section>
+
+  <button id="confirm" type="button" disabled>確認した。送信を許可する</button>
+  <p id="status" role="status"></p>
+
+  <script src="shared.js"></script>
+  <script src="taskpane.js"></script>
+</body>
+</html>
